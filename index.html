@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRFE - Financial Education Made Easy</title>
+    <meta name="description" content="Build a rock-solid foundation in the stock market and personal finance through expert-led classes and personalized guidance.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0099ff',
+                        secondary: '#64748b'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Urbanist', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNZD63EQD4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FNZD63EQD4');
+    </script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.6s ease-in-out; }
+        .slide-up { animation: slideUp 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <img src="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png" alt="VRFE Logo" class="h-8 w-8">
+                        <span class="text-xl font-bold text-gray-900">VRFE</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-900 hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="/courses/" class="text-gray-600 hover:text-primary transition-colors">Courses</a>
+                    <a href="/consulting/" class="text-gray-600 hover:text-primary transition-colors">Consulting</a>
+                    <a href="/contact/" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                    <a href="/courses/" class="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Learn More</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-4">
+                <a href="/" class="block text-gray-900 font-medium">Home</a>
+                <a href="/courses/" class="block text-gray-600 hover:text-primary">Courses</a>
+                <a href="/consulting/" class="block text-gray-600 hover:text-primary">Consulting</a>
+                <a href="/contact/" class="block text-gray-600 hover:text-primary">Contact</a>
+                <a href="/courses/" class="block bg-black text-white px-4 py-2 rounded-lg text-center">Learn More</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-blue-50 to-white pt-20 pb-16 lg:pt-28 lg:pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center bg-white border border-gray-200 rounded-full px-4 py-2 mb-8">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium text-gray-600">Finance made easy</span>
+                </div>
+
+                <!-- Heading -->
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 fade-in">
+                    Learn Finance.<br>
+                    <span class="text-primary">Invest Smarter.</span>
+                </h1>
+
+                <!-- Description -->
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto slide-up">
+                    Build a rock-solid foundation in the stock market and personal finance — through expert-led classes and personalized guidance.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center slide-up">
+                    <a href="/courses/" class="bg-black text-white px-8 py-4 rounded-lg font-medium hover:bg-gray-800 transition-colors inline-flex items-center">
+                        Start Learning
+                        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                    <span class="text-gray-500">Start your journey here!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center bg-gray-50 border border-gray-200 rounded-full px-4 py-2 mb-6">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium text-gray-600">What You'll Get</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Courses. Coaching. Real-World Insight
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    We don't just teach theory. We help you apply it. In Real Markets, under Real conditions, with Real-time support.
+                </p>
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Basic Courses Card -->
+                <div class="bg-blue-50 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Basic courses</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            Understand the stock market, portfolio management, risk assessment, and smart investing principles — all in one expertly crafted course you can take on your own schedule.
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            Perfect for beginners and intermediate learners looking to solidify their knowledge.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Intermediate Courses Card -->
+                <div class="bg-green-50 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Intermediate courses</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            Watch and learn as we analyze markets and place trades in real time. Ask questions, test your thinking, and build confidence with every session.
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            See what works. Ask why it works. Apply it yourself.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Workshop Card -->
+                <div class="bg-orange-50 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">On-site Workshop</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            Bring your strategies, trading plans, or investing ideas — and get direct feedback in focused, in-person sessions.
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            We refine your ideas. You walk out sharper.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Offer Section -->
+    <section class="py-16 lg:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center bg-white border border-gray-200 rounded-full px-4 py-2 mb-6">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium text-gray-600">What we offer</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    This is more than Education
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Whether you're new or experienced, we give you tools, insights, and accountability that actually make a difference.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Self-Paced Masterclass -->
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">Self-Paced Masterclass: Foundations of the Market</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-600 text-sm">Understand the stock market, portfolio management, risk assessment, and smart investing principles — all in one expertly crafted course you can take on your own schedule.</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-600 text-sm">Perfect for beginners and intermediate learners looking to solidify their knowledge.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Market Training -->
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">Live Market Training Sessions</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-600 text-sm">Watch and learn as we analyze markets and place trades in real time. Ask questions, test your thinking, and build confidence with every session.</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-600 text-sm">See what works. Ask why it works. Apply it yourself.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategy Workshops -->
+                <div class="bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">On-Site Strategy Workshops</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-600 text-sm">Bring your strategies, trading plans, or investing ideas — and get direct feedback in focused, in-person sessions.</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-600 text-sm">We refine your ideas. You walk out sharper.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center bg-gray-50 border border-gray-200 rounded-full px-4 py-2 mb-6">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span class="text-sm font-medium text-gray-600">Testimonials</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">What our clients say about us</h2>
+            </div>
+
+            <!-- Testimonials Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <p class="text-gray-700 mb-6">"I had zero knowledge about the stock market before taking the Foundations of the Market course. The lessons were straightforward and easy to follow, and I love how I could go at my own pace. Highly recommended for anyone starting from scratch."</p>
+                    <div class="flex items-center">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Ravi Kumar</h4>
+                            <p class="text-sm text-gray-500">Software Engineer & Beginner Investor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <p class="text-gray-700 mb-6">"The Live Market Training Sessions were exactly what I needed to bridge the gap between theory and real-world trading. I was able to see market analysis in real-time and ask questions during the sessions, which helped me improve my decision-making skills."</p>
+                    <div class="flex items-center">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Simran P.</h4>
+                            <p class="text-sm text-gray-500">Working Professional & Intermediate Trader</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <p class="text-gray-700 mb-6">"I attended the On-Site Strategy Workshop. I brought in my trading strategies and received detailed feedback on everything I was doing wrong. The instructors took the time to break down each trade, corrected my mistakes, and helped me refine my strategy."</p>
+                    <div class="flex items-center">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Mayank</h4>
+                            <p class="text-sm text-gray-500">SDE, Amazon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 lg:py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-90"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Whether you want to learn, refine, or grow - we're here to help.</h2>
+            <a href="https://calendly.com/vrpersonalfinance/book-a-call-with-our-consultant" target="_blank" class="bg-white text-gray-900 px-8 py-4 rounded-lg font-medium hover:bg-gray-100 transition-colors inline-flex items-center">
+                Get a Consult
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <img src="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png" alt="VRFE Logo" class="h-8 w-8">
+                    <span class="text-xl font-bold text-gray-900">VRFE</span>
+                </div>
+
+                <!-- Links -->
+                <div class="flex flex-wrap justify-center gap-6 text-sm">
+                    <a href="/useful/privacy-policy/" class="text-gray-600 hover:text-primary transition-colors">Privacy</a>
+                    <a href="/useful/terms-and-conditions/" class="text-gray-600 hover:text-primary transition-colors">Terms</a>
+                    <a href="/useful/cancellation-refund/" class="text-gray-600 hover:text-primary transition-colors">Cancellation</a>
+                    <a href="/webinar/" class="text-gray-600 hover:text-primary transition-colors">Webinar</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animations
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
