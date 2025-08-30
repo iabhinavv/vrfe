@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulting - VRFE</title>
+    <meta name="description" content="Get personalized financial consulting and strategy guidance from our experts.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0099ff',
+                        secondary: '#64748b'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Urbanist', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-900 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <img src="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png" alt="VRFE Logo" class="h-8 w-8">
+                        <span class="text-xl font-bold text-gray-900">VRFE</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                    <a href="/courses/" class="text-gray-600 hover:text-primary transition-colors">Courses</a>
+                    <a href="/consulting/" class="text-gray-900 hover:text-primary transition-colors font-medium">Consulting</a>
+                    <a href="/contact/" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                    <a href="https://calendly.com/vrpersonalfinance/book-a-call-with-our-consultant" target="_blank" class="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Book Consultation</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-4">
+                <a href="/" class="block text-gray-600">Home</a>
+                <a href="/courses/" class="block text-gray-600">Courses</a>
+                <a href="/consulting/" class="block text-gray-900 font-medium">Consulting</a>
+                <a href="/contact/" class="block text-gray-600">Contact</a>
+                <a href="https://calendly.com/vrpersonalfinance/book-a-call-with-our-consultant" target="_blank" class="block bg-black text-white px-4 py-2 rounded-lg text-center">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-blue-50 to-white pt-20 pb-16 lg:pt-28 lg:pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Expert <span class="text-primary">Financial Consulting</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Get personalized guidance from our financial experts. Review your portfolio, refine your strategy, and accelerate your financial growth.
+                </p>
+                <a href="https://calendly.com/vrpersonalfinance/book-a-call-with-our-consultant" target="_blank" class="bg-black text-white px-8 py-4 rounded-lg font-medium hover:bg-gray-800 transition-colors inline-flex items-center">
+                    Schedule Consultation
+                    <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Consulting Services</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Whether you need a portfolio review, strategy consultation, or ongoing guidance, we're here to help.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Portfolio Review -->
+                <div class="bg-blue-50 rounded-xl p-8 border border-blue-100">
+                    <div class="w-12 h-12 bg-blue-500 text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Portfolio Review</h3>
+                    <p class="text-gray-600 mb-6">Comprehensive analysis of your current investments with actionable recommendations for optimization.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>• Risk assessment analysis</li>
+                        <li>• Asset allocation review</li>
+                        <li>• Performance evaluation</li>
+                        <li>• Rebalancing recommendations</li>
+                    </ul>
+                </div>
+
+                <!-- Strategy Development -->
+                <div class="bg-green-50 rounded-xl p-8 border border-green-100">
+                    <div class="w-12 h-12 bg-green-500 text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Strategy Development</h3>
+                    <p class="text-gray-600 mb-6">Custom investment strategies tailored to your goals, risk tolerance, and financial situation.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>• Goal-based planning</li>
+                        <li>• Risk profiling</li>
+                        <li>• Investment timeline planning</li>
+                        <li>• Tax optimization strategies</li>
+                    </ul>
+                </div>
+
+                <!-- Ongoing Support -->
+                <div class="bg-purple-50 rounded-xl p-8 border border-purple-100">
+                    <div class="w-12 h-12 bg-purple-500 text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Ongoing Support</h3>
+                    <p class="text-gray-600 mb-6">Regular check-ins and continuous guidance to keep your investments on track.</p>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>• Monthly review calls</li>
+                        <li>• Market update insights</li>
+                        <li>• Strategy adjustments</li>
+                        <li>• Q&A support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-16 lg:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+                <p class="text-xl text-gray-600">Simple steps to get expert financial guidance</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-bold">1</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Book Your Call</h3>
+                    <p class="text-gray-600">Schedule a consultation at your convenience using our online calendar.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-bold">2</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Share Your Goals</h3>
+                    <p class="text-gray-600">Tell us about your financial situation, goals, and any specific concerns.</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-6 text-xl font-bold">3</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Get Expert Advice</h3>
+                    <p class="text-gray-600">Receive personalized recommendations and actionable strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 lg:py-24 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Take Control of Your Financial Future?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Book a consultation today and get personalized guidance from our financial experts.</p>
+            <a href="https://calendly.com/vrpersonalfinance/book-a-call-with-our-consultant" target="_blank" class="bg-primary text-white px-8 py-4 rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center">
+                Schedule Your Consultation
+                <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <img src="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png" alt="VRFE Logo" class="h-8 w-8">
+                    <span class="text-xl font-bold text-gray-900">VRFE</span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 text-sm">
+                    <a href="/useful/privacy-policy/" class="text-gray-600 hover:text-primary transition-colors">Privacy</a>
+                    <a href="/useful/terms-and-conditions/" class="text-gray-600 hover:text-primary transition-colors">Terms</a>
+                    <a href="/useful/cancellation-refund/" class="text-gray-600 hover:text-primary transition-colors">Cancellation</a>
+                    <a href="/webinar/" class="text-gray-600 hover:text-primary transition-colors">Webinar</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
