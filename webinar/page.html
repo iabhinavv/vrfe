@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinar - VRFE</title>
+    <meta name="description" content="Join our free financial education webinars and learn from industry experts.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0099ff',
+                        secondary: '#64748b'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Urbanist', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-900 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <img src="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png" alt="VRFE Logo" class="h-8 w-8">
+                        <span class="text-xl font-bold text-gray-900">VRFE</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                    <a href="/courses/" class="text-gray-600 hover:text-primary transition-colors">Courses</a>
+                    <a href="/consulting/" class="text-gray-600 hover:text-primary transition-colors">Consulting</a>
+                    <a href="/contact/" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                    <a href="/webinar/" class="text-gray-900 hover:text-primary transition-colors font-medium">Webinar</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-4 space-y-4">
+                <a href="/" class="block text-gray-600">Home</a>
+                <a href="/courses/" class="block text-gray-600">Courses</a>
+                <a href="/consulting/" class="block text-gray-600">Consulting</a>
+                <a href="/contact/" class="block text-gray-600">Contact</a>
+                <a href="/webinar/" class="block text-gray-900 font-medium">Webinar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-blue-50 to-white pt-20 pb-16 lg:pt-28 lg:pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Free Financial <span class="text-primary">Webinars</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Join our expert-led webinars and learn essential financial skills from the comfort of your home.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Webinars Section -->
+    <section class="py-16 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Upcoming Webinars</h2>
+                <p class="text-xl text-gray-600">Learn from industry experts and take your financial knowledge to the next level</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Webinar 1 -->
+                <div class="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-500 text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Stock Market Basics</h3>
+                    <p class="text-gray-600 mb-6">Learn the fundamentals of stock market investing, including how to read charts and understand market trends.</p>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <p>📅 Every Saturday at 10:00 AM</p>
+                        <p>⏰ Duration: 1 hour</p>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                        Register Free
+                    </button>
+                </div>
+
+                <!-- Webinar 2 -->
+                <div class="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-green-500 text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Personal Finance 101</h3>
+                    <p class="text-gray-600 mb-6">Master budgeting, saving, and building an emergency fund. Essential skills for financial independence.</p>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <p>📅 Every Wednesday at 7:00 PM</p>
+                        <p>⏰ Duration: 45 minutes</p>
+                    </div>
+                    <button class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-green-700 transition-colors">
+                        Register Free
+                    </button>
+                </div>
+
+                <!-- Webinar 3 -->
+                <div class="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-purple-500 text-white rounded-lg flex items-center justify-center mb-6">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Advanced Trading Strategies</h3>
+                    <p class="text-gray-600 mb-6">Explore advanced trading techniques, risk management, and portfolio optimization strategies.</p>
+                    <div class="text-sm text-gray-500 mb-4">
+                        <p>📅 Monthly - Last Sunday at 2:00 PM</p>
+                        <p>⏰ Duration: 90 minutes</p>
+                    </div>
+                    <button class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                        Register Free
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 lg:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Can't Attend Live?</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">All registered attendees receive access to webinar recordings and additional resources.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/courses/" class="bg-primary text-white px-8 py-4 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                    Explore Our Courses
+                </a>
+                <a href="/contact/" class="bg-white text-gray-900 border border-gray-300 px-8 py-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <img src="https://framerusercontent.com/images/b95nTW6RbrDx0Ok4YEsvo8MbRWE.png" alt="VRFE Logo" class="h-8 w-8">
+                    <span class="text-xl font-bold text-gray-900">VRFE</span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 text-sm">
+                    <a href="/useful/privacy-policy/" class="text-gray-600 hover:text-primary transition-colors">Privacy</a>
+                    <a href="/useful/terms-and-conditions/" class="text-gray-600 hover:text-primary transition-colors">Terms</a>
+                    <a href="/useful/cancellation-refund/" class="text-gray-600 hover:text-primary transition-colors">Cancellation</a>
+                    <a href="/webinar/" class="text-gray-600 hover:text-primary transition-colors">Webinar</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Registration buttons
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Register')) {
+                button.addEventListener('click', () => {
+                    alert('Thank you for your interest! Registration will open soon.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
