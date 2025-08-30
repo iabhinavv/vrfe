@@ -1,0 +1,20 @@
+# Netlify redirects
+/courses /courses/page.html 200
+/courses/ /courses/page.html 200
+/consulting /consulting/page.html 200
+/consulting/ /consulting/page.html 200
+/contact /contact/page.html 200
+/contact/ /contact/page.html 200
+/webinar /webinar/page.html 200
+/webinar/ /webinar/page.html 200
+
+# Useful pages redirects
+/useful/privacy-policy /useful/privacy-policy/page.html 200
+/useful/privacy-policy/ /useful/privacy-policy/page.html 200
+/useful/terms-and-conditions /useful/terms-and-conditions/page.html 200
+/useful/terms-and-conditions/ /useful/terms-and-conditions/page.html 200
+/useful/cancellation-refund /useful/cancellation-refund/page.html 200
+/useful/cancellation-refund/ /useful/cancellation-refund/page.html 200
+
+# Handle SPA fallback for any other routes
+/* /index.html 404
