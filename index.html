@@ -1,622 +1,523 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VRFE - Finance made easy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom styles for smooth view transitions */
-        .view {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-        .view.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            400: '#2dd4bf',
-                            500: '#14b8a6',
-                            600: '#0d9488',
-                            900: '#134e4a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VRFE – Learn Finance. Invest Smarter.</title>
+  <meta name="description" content="Build a rock-solid foundation in the stock market and personal finance through expert-led classes and personalized guidance." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Inter', system-ui, sans-serif; }
+    html { scroll-behavior: smooth; }
+    .page { display: none; }
+    .page.active { display: block; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page.active { animation: fadeInUp 0.3s ease-out; }
+    @keyframes ping {
+      75%, 100% { transform: scale(2); opacity: 0; }
+    }
+    .animate-ping { animation: ping 1s cubic-bezier(0,0,.2,1) infinite; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-200 font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-white text-slate-900 antialiased">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#home" class="flex items-center gap-2 text-2xl font-bold bg-gradient-to-r from-brand-400 to-blue-500 bg-clip-text text-transparent">
-                        <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                        VRFE
-                    </a>
-                </div>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="text-slate-300 hover:text-white transition-colors font-medium">Home</a>
-                    <a href="#courses" class="text-slate-300 hover:text-white transition-colors font-medium">Courses</a>
-                    <a href="#webinar" class="text-slate-300 hover:text-white transition-colors font-medium">Webinar</a>
-                    <a href="#home-offerings" onclick="goHomeAndScroll('offerings')" class="text-slate-300 hover:text-white transition-colors font-medium">What We Offer</a>
-                    <a href="#home-testimonials" onclick="goHomeAndScroll('testimonials')" class="text-slate-300 hover:text-white transition-colors font-medium">Testimonials</a>
-                    <a href="#courses" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-lg shadow-brand-500/25">Start Learning</a>
-                </div>
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                    </button>
-                </div>
-            </div>
+<!-- ── NAV ── -->
+<nav id="nav" class="fixed w-full z-50 bg-white border-b border-slate-100 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <button onclick="navigate('home')" class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-xs">VR</span>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md">Home</a>
-                <a href="#courses" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md">Courses</a>
-                <a href="#webinar" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md">Webinar</a>
-                <a href="#privacy" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md">Privacy Policy</a>
-                <a href="#terms" class="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md">Terms of Service</a>
-            </div>
+        <span class="font-bold text-slate-900 text-lg">VRFE</span>
+      </button>
+
+      <div class="hidden md:flex items-center gap-8">
+        <button onclick="navigate('home')" id="nav-home" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Home</button>
+        <button onclick="navigate('courses')" id="nav-courses" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Courses</button>
+        <button onclick="navigate('consulting')" id="nav-consulting" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Consulting</button>
+        <button onclick="navigate('webinar')" id="nav-webinar" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Webinar</button>
+        <button onclick="navigate('courses')" class="bg-slate-900 hover:bg-slate-700 text-white text-sm px-5 py-2 rounded-md font-medium transition-colors">
+          Learn More
+        </button>
+      </div>
+
+      <button id="menu-btn" onclick="toggleMenu()" class="md:hidden text-slate-600">
+        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100">
+    <div class="px-4 pt-2 pb-4 space-y-1">
+      <button onclick="navigate('home')" class="block w-full text-left px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-md text-sm font-medium">Home</button>
+      <button onclick="navigate('courses')" class="block w-full text-left px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-md text-sm font-medium">Courses</button>
+      <button onclick="navigate('consulting')" class="block w-full text-left px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-md text-sm font-medium">Consulting</button>
+      <button onclick="navigate('webinar')" class="block w-full text-left px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-md text-sm font-medium">Webinar</button>
+      <button onclick="navigate('courses')" class="block w-full text-left px-3 py-2 bg-slate-900 text-white rounded-md text-sm font-medium mt-2">Learn More</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HOME ── -->
+<div id="page-home" class="page active pt-16">
+
+  <!-- Hero -->
+  <section class="py-24 md:py-32 bg-white text-center px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 text-slate-500 text-xs font-medium mb-8 bg-slate-50">
+        Finance made easy
+      </div>
+      <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-5 leading-tight tracking-tight">
+        Learn Finance. Invest Smarter.
+      </h1>
+      <p class="text-slate-500 text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+        Build a rock-solid foundation in the stock market and personal finance — through expert-led classes and personalized guidance.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <button onclick="navigate('courses')" class="bg-slate-900 hover:bg-slate-700 text-white px-7 py-3 rounded-md font-semibold text-sm transition-colors">
+          Courses
+        </button>
+        <button onclick="navigate('courses')" class="text-slate-600 hover:text-slate-900 text-sm font-medium transition-colors underline underline-offset-4">
+          start your journey here!
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You'll Get -->
+  <section class="py-20 bg-slate-50 text-center px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 text-slate-500 text-xs font-medium mb-8 bg-white">
+        What You'll Get
+      </div>
+      <h2 class="text-2xl md:text-4xl font-bold text-slate-900 mb-4">Courses. Coaching. Real-World Insight.</h2>
+      <p class="text-slate-500 mb-14 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+        We don't just teach theory. We help you apply it. In Real Markets, under Real conditions, with Real-time support.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-violet-100 rounded-2xl overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
+          <div class="h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&auto=format&fit=crop&q=80" alt="Basic Courses" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-slate-900 text-base">Basic courses</h3>
+            <p class="text-slate-600 text-xs mt-1">Perfect for absolute beginners building a foundation from scratch.</p>
+          </div>
         </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main class="flex-grow pt-20">
-
-        <!-- ==================== HOME VIEW ==================== -->
-        <div id="home-view" class="view active">
-            <!-- Hero Section -->
-            <section class="relative py-20 lg:py-32 overflow-hidden">
-                <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-900/40 via-slate-950 to-slate-950 -z-10"></div>
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-brand-400 text-sm font-medium mb-6">
-                                <span class="relative flex h-2 w-2">
-                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
-                                </span>
-                                Real Markets. Real Support.
-                            </div>
-                            <h1 class="text-5xl lg:text-7xl font-bold tracking-tight mb-6">
-                                Finance made <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-blue-500">easy.</span><br>
-                                Invest Smarter.
-                            </h1>
-                            <p class="text-lg lg:text-xl text-slate-400 mb-8 max-w-lg leading-relaxed">
-                                Build a rock-solid foundation in the stock market and personal finance — through expert-led classes and personalized guidance.
-                            </p>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <button class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2">
-                                    Start your journey here!
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                                </button>
-                                <button class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-8 py-4 rounded-full font-semibold transition-all flex items-center justify-center">
-                                    View Courses
-                                </button>
-                            </div>
-                        </div>
-                        <div class="relative hidden lg:block">
-                            <!-- Placeholder for Dashboard/Trading abstract image -->
-                            <div class="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
-                                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop" alt="Trading Dashboard" class="w-full h-auto object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Features / What You'll Get -->
-            <section class="py-20 bg-slate-900 border-y border-slate-800/50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-brand-400 font-semibold tracking-wide uppercase mb-3">What You'll Get</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold mb-6">Courses. Coaching. Real-World Insight.</h3>
-                    <p class="text-slate-400 max-w-2xl mx-auto mb-16 text-lg">
-                        We don't just teach theory. We help you apply it. In Real Markets, under Real conditions, with Real-time support.
-                    </p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="bg-slate-950 border border-slate-800 p-8 rounded-2xl hover:border-brand-500/50 transition-colors group">
-                            <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-brand-400 group-hover:bg-brand-500 group-hover:text-white transition-colors mx-auto">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                            </div>
-                            <h4 class="text-xl font-bold mb-3">Basic Courses</h4>
-                            <p class="text-slate-400 text-sm">Perfect for absolute beginners looking to build a foundation from scratch.</p>
-                        </div>
-                        <div class="bg-slate-950 border border-slate-800 p-8 rounded-2xl hover:border-brand-500/50 transition-colors group relative overflow-hidden">
-                            <div class="absolute top-0 right-0 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
-                            <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-brand-400 group-hover:bg-brand-500 group-hover:text-white transition-colors mx-auto">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                            </div>
-                            <h4 class="text-xl font-bold mb-3">Intermediate Courses</h4>
-                            <p class="text-slate-400 text-sm">Elevate your strategy, manage risks, and dive deeper into market mechanics.</p>
-                        </div>
-                        <div class="bg-slate-950 border border-slate-800 p-8 rounded-2xl hover:border-brand-500/50 transition-colors group">
-                            <div class="w-14 h-14 bg-slate-900 rounded-xl flex items-center justify-center mb-6 text-brand-400 group-hover:bg-brand-500 group-hover:text-white transition-colors mx-auto">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            </div>
-                            <h4 class="text-xl font-bold mb-3">On-site Workshops</h4>
-                            <p class="text-slate-400 text-sm">Intensive, focused, in-person strategy refinement with direct feedback.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Offerings Section -->
-            <section id="offerings" class="py-24">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="mb-16 max-w-3xl">
-                        <h2 class="text-3xl md:text-5xl font-bold mb-6">This is more than <span class="text-brand-400">Education.</span></h2>
-                        <p class="text-xl text-slate-400">Whether you're new or experienced, we give you tools, insights, and accountability that actually make a difference.</p>
-                    </div>
-
-                    <div class="space-y-6">
-                        <!-- Offering 1 -->
-                        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 lg:p-12 flex flex-col md:flex-row gap-8 items-center hover:bg-slate-800/50 transition-all">
-                            <div class="flex-1">
-                                <div class="inline-block px-4 py-1 rounded-full bg-blue-900/30 text-blue-400 text-sm font-semibold mb-4 border border-blue-800/50">Self-Paced</div>
-                                <h3 class="text-2xl lg:text-3xl font-bold mb-4">Foundations of the Market Masterclass</h3>
-                                <p class="text-slate-400 mb-6 leading-relaxed">
-                                    Understand the stock market, portfolio management, risk assessment, and smart investing principles — all in one expertly crafted course you can take on your own schedule. Perfect for beginners and intermediate learners looking to solidify their knowledge.
-                                </p>
-                                <button class="text-brand-400 font-semibold hover:text-brand-300 flex items-center gap-2 transition-colors">
-                                    Explore Masterclass <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Offering 2 -->
-                        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 lg:p-12 flex flex-col md:flex-row gap-8 items-center hover:bg-slate-800/50 transition-all">
-                            <div class="flex-1">
-                                <div class="inline-block px-4 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm font-semibold mb-4 border border-emerald-800/50">Live Environment</div>
-                                <h3 class="text-2xl lg:text-3xl font-bold mb-4">Live Market Training Sessions</h3>
-                                <p class="text-slate-400 mb-6 leading-relaxed">
-                                    Watch and learn as we analyze markets and place trades in real time. Ask questions, test your thinking, and build confidence with every session. See what works. Ask why it works. Apply it yourself.
-                                </p>
-                                <button class="text-brand-400 font-semibold hover:text-brand-300 flex items-center gap-2 transition-colors">
-                                    Join Next Session <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Offering 3 -->
-                        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 lg:p-12 flex flex-col md:flex-row gap-8 items-center hover:bg-slate-800/50 transition-all">
-                            <div class="flex-1">
-                                <div class="inline-block px-4 py-1 rounded-full bg-purple-900/30 text-purple-400 text-sm font-semibold mb-4 border border-purple-800/50">In-Person</div>
-                                <h3 class="text-2xl lg:text-3xl font-bold mb-4">On-Site Strategy Workshops</h3>
-                                <p class="text-slate-400 mb-6 leading-relaxed">
-                                    Bring your strategies, trading plans, or investing ideas — and get direct feedback in focused, in-person sessions. We refine your ideas. You walk out sharper.
-                                </p>
-                                <button class="text-brand-400 font-semibold hover:text-brand-300 flex items-center gap-2 transition-colors">
-                                    Book a Seat <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Testimonials -->
-            <section id="testimonials" class="py-24 bg-slate-900 border-t border-slate-800/50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">What our clients say about us</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Testimonial 1 -->
-                        <div class="p-8 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-                            <div>
-                                <div class="flex text-amber-400 mb-4">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                </div>
-                                <p class="text-slate-300 italic mb-6">"I had zero knowledge about the stock market before taking the Foundations of the Market course. The lessons were straightforward and easy to follow, and I love how I could go at my own pace. Highly recommended for anyone starting from scratch."</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-400">RK</div>
-                                <div>
-                                    <p class="font-bold text-white">Ravi Kumar</p>
-                                    <p class="text-sm text-slate-400">Software Engineer & Beginner Investor</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Testimonial 2 -->
-                        <div class="p-8 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-                            <div>
-                                <div class="flex text-amber-400 mb-4">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                </div>
-                                <p class="text-slate-300 italic mb-6">"The Live Market Training Sessions were exactly what I needed to bridge the gap between theory and real-world trading. I was able to see market analysis in real-time and ask questions during the sessions."</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-400">SP</div>
-                                <div>
-                                    <p class="font-bold text-white">Simran P.</p>
-                                    <p class="text-sm text-slate-400">Working Professional & Intermediate Trader</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Testimonial 3 -->
-                        <div class="p-8 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-                            <div>
-                                <div class="flex text-amber-400 mb-4">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                </div>
-                                <p class="text-slate-300 italic mb-6">"I attended the On-Site Strategy Workshop. I brought in my trading strategies and received detailed feedback on everything I was doing wrong. The instructors took the time to break down each trade."</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-400">M</div>
-                                <div>
-                                    <p class="font-bold text-white">Mayank</p>
-                                    <p class="text-sm text-slate-400">SDE, Amazon</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Testimonial 4 -->
-                        <div class="p-8 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-                            <div>
-                                <div class="flex text-amber-400 mb-4">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                </div>
-                                <p class="text-slate-300 italic mb-6">"I booked a 1-on-1 Consulting Call because I was struggling with my trades. The session was incredibly helpful. The expert pointed out my emotional triggers and risk management issues."</p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-400">AR</div>
-                                <div>
-                                    <p class="font-bold text-white">Amit Rathore</p>
-                                    <p class="text-sm text-slate-400">Entrepreneur & Active Trader</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <div class="bg-orange-100 rounded-2xl overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
+          <div class="h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&auto=format&fit=crop&q=80" alt="Intermediate Courses" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-slate-900 text-base">Intermediate courses</h3>
+            <p class="text-slate-600 text-xs mt-1">Elevate your strategy, manage risks, and dive deeper into market mechanics.</p>
+          </div>
         </div>
-
-
-        <!-- ==================== PRIVACY POLICY VIEW ==================== -->
-        <div id="privacy-view" class="view hidden">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 py-20">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 md:p-12 mt-8">
-                    <h1 class="text-3xl md:text-5xl font-bold mb-8">Privacy Policy</h1>
-                    <div class="prose prose-invert max-w-none text-slate-300 space-y-6">
-                        <p>Last updated: <script>document.write(new Date().toLocaleDateString())</script></p>
-                        
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">1. Information We Collect</h2>
-                        <p>Welcome to VR Financial Educators (VRFE). We respect your privacy and are committed to protecting your personal data. We may collect personal identification information including, but not limited to, your name, email address, phone number, and financial background information when you register for a course, consultation, or newsletter.</p>
-                        
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">2. How We Use Your Information</h2>
-                        <p>The information we collect is used to:</p>
-                        <ul class="list-disc pl-6 space-y-2">
-                            <li>Provide, operate, and maintain our educational services.</li>
-                            <li>Improve, personalize, and expand our website and course materials.</li>
-                            <li>Communicate with you, including customer service updates and marketing communications.</li>
-                            <li>Process transactions securely.</li>
-                        </ul>
-
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">3. Data Protection and Security</h2>
-                        <p>We implement a variety of security measures to maintain the safety of your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee its absolute security.</p>
-
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">4. Third-Party Services</h2>
-                        <p>We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information unless we provide users with advance notice. This does not include website hosting partners and other parties who assist us in operating our website.</p>
-
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">5. Contact Us</h2>
-                        <p>If you have any questions about this Privacy Policy, please contact us via our website's support portal.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="bg-pink-100 rounded-2xl overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
+          <div class="h-48 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&auto=format&fit=crop&q=80" alt="On-site Workshop" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="p-5 text-left">
+            <h3 class="font-bold text-slate-900 text-base">On-site Workshop</h3>
+            <p class="text-slate-600 text-xs mt-1">Intensive, focused, in-person strategy refinement with direct feedback.</p>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-
-        <!-- ==================== TERMS OF SERVICE VIEW ==================== -->
-        <div id="terms-view" class="view hidden">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 py-20">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 md:p-12 mt-8">
-                    <h1 class="text-3xl md:text-5xl font-bold mb-8">Terms of Service</h1>
-                    <div class="prose prose-invert max-w-none text-slate-300 space-y-6">
-                        <p>Last updated: <script>document.write(new Date().toLocaleDateString())</script></p>
-
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">1. Acceptance of Terms</h2>
-                        <p>By accessing and using the VRFE (VR Financial Educators) website and its educational resources, you accept and agree to be bound by the terms and provision of this agreement.</p>
-
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">2. Educational Purposes Only (Disclaimer)</h2>
-                        <p class="font-semibold text-brand-400 p-4 bg-brand-900/20 rounded-lg border border-brand-800/50">
-                            The materials provided by VRFE, including courses, workshops, and coaching sessions, are strictly for educational and informational purposes. We are NOT registered financial advisors. Nothing provided constitutes financial, investment, or trading advice. Trading in financial markets involves a high degree of risk, and you could lose some or all of your initial investment. Always consult with a certified financial professional before making investment decisions.
-                        </p>
-
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">3. User Obligations</h2>
-                        <p>You agree to use our services only for lawful purposes. You must not distribute, modify, transmit, reuse, download, repost, copy, or use said Content, whether in whole or in part, for commercial purposes or for personal gain, without express advance written permission from us.</p>
-
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">4. Course Access and Cancellations</h2>
-                        <p>Access to self-paced courses is granted upon successful payment. Refund and cancellation policies are detailed on the individual course purchase pages. Live sessions and on-site workshops require 48 hours notice for rescheduling.</p>
-
-                        <h2 class="text-2xl font-semibold text-white mt-8 mb-4">5. Modifications to Terms</h2>
-                        <p>VRFE reserves the right to revise these terms at any time. By using this website, you are agreeing to be bound by the then-current version of these terms of service.</p>
-                    </div>
-                </div>
-            </div>
+  <!-- Offerings -->
+  <section class="py-20 bg-white text-center px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-slate-200 text-slate-500 text-xs font-medium mb-8 bg-slate-50">
+        What we offer
+      </div>
+      <h2 class="text-2xl md:text-4xl font-bold text-slate-900 mb-4">This is more than Education</h2>
+      <p class="text-slate-500 mb-14 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+        Whether you're new or experienced, we give you tools, insights, and accountability that actually make a difference.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-md transition-shadow group">
+          <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          </div>
+          <div class="inline-block px-3 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold mb-3">Self-Paced</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Self-Paced Masterclass: Foundations of the Market</h3>
+          <ul class="text-slate-500 text-xs space-y-1.5 mb-4">
+            <li class="flex items-start gap-2"><span class="text-slate-400 mt-0.5">•</span>Understand the stock market, portfolio management, risk assessment, and smart investing principles — all in one expertly crafted course.</li>
+            <li class="flex items-start gap-2"><span class="text-slate-400 mt-0.5">•</span>Perfect for beginners and intermediate learners looking to solidify their knowledge.</li>
+          </ul>
+          <button onclick="navigate('courses')" class="text-slate-900 text-xs font-semibold flex items-center gap-1 group-hover:text-teal-600 transition-colors">
+            Explore Masterclass
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
         </div>
-
-        <!-- ==================== COURSES VIEW ==================== -->
-        <div id="courses-view" class="view hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                <div class="text-center mb-16 mt-8">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6">Our <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-blue-500">Courses</span></h1>
-                    <p class="text-xl text-slate-400 max-w-3xl mx-auto">From beginner basics to advanced trading strategies, find the right program to elevate your financial journey.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Course 1 -->
-                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 hover:border-brand-500/50 transition-all flex flex-col h-full group">
-                        <div class="inline-block px-4 py-1 rounded-full bg-blue-900/30 text-blue-400 text-xs font-semibold mb-6 border border-blue-800/50 w-max">Beginner</div>
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-400 transition-colors">Foundations of the Market</h3>
-                        <p class="text-slate-400 mb-8 flex-grow">Start your journey here. Learn the terminology, how exchanges work, portfolio management, risk assessment, and smart investing principles.</p>
-                        <div class="border-t border-slate-800 pt-6 mt-auto flex items-center justify-between">
-                            <span class="text-2xl font-bold text-white">₹4,999</span>
-                            <button class="bg-slate-800 hover:bg-brand-500 text-white px-5 py-2 rounded-full font-semibold transition-all text-sm">Enroll Now</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Course 2 -->
-                    <div class="bg-slate-900 border border-brand-500/30 rounded-3xl p-8 hover:border-brand-500/80 transition-all flex flex-col h-full relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 bg-brand-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl shadow-lg">POPULAR</div>
-                        <div class="inline-block px-4 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs font-semibold mb-6 border border-emerald-800/50 w-max">Intermediate</div>
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-400 transition-colors">Advanced Price Action</h3>
-                        <p class="text-slate-400 mb-8 flex-grow">Elevate your strategy. Dive deep into chart patterns, multi-timeframe analysis, and precision entries for active trading.</p>
-                        <div class="border-t border-slate-800 pt-6 mt-auto flex items-center justify-between">
-                            <span class="text-2xl font-bold text-white">₹9,999</span>
-                            <button class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2 rounded-full font-semibold transition-all text-sm shadow-lg shadow-brand-500/25">Enroll Now</button>
-                        </div>
-                    </div>
-
-                    <!-- Course 3 -->
-                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 hover:border-brand-500/50 transition-all flex flex-col h-full group">
-                        <div class="inline-block px-4 py-1 rounded-full bg-purple-900/30 text-purple-400 text-xs font-semibold mb-6 border border-purple-800/50 w-max">Pro / Live</div>
-                        <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-400 transition-colors">Live Market Mentorship</h3>
-                        <p class="text-slate-400 mb-8 flex-grow">Trade alongside experts. Real-time market analysis, live trade execution, and 1-on-1 strategy refinement sessions.</p>
-                        <div class="border-t border-slate-800 pt-6 mt-auto flex items-center justify-between">
-                            <span class="text-2xl font-bold text-white">₹24,999</span>
-                            <button class="bg-slate-800 hover:bg-brand-500 text-white px-5 py-2 rounded-full font-semibold transition-all text-sm">Apply Now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-md transition-shadow group">
+          <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <div class="inline-block px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold mb-3">Live Environment</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2">Live Market Training Sessions</h3>
+          <p class="text-slate-500 text-xs mb-4 leading-relaxed">Watch and learn as we analyze markets and place trades in real time. Ask questions, test your thinking, and build confidence with every session.</p>
+          <button onclick="navigate('webinar')" class="text-slate-900 text-xs font-semibold flex items-center gap-1 group-hover:text-teal-600 transition-colors">
+            Join Next Session
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
         </div>
-
-        <!-- ==================== WEBINAR VIEW ==================== -->
-        <div id="webinar-view" class="view hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mt-8">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-900/30 border border-red-800/50 text-red-400 text-sm font-medium mb-6">
-                            <span class="relative flex h-2 w-2">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                            </span>
-                            Upcoming Live Session
-                        </div>
-                        <h1 class="text-4xl md:text-6xl font-bold mb-6">Mastering Market Volatility</h1>
-                        <p class="text-xl text-slate-400 mb-8">Join our exclusive live masterclass and discover the exact strategies professional traders use to navigate unpredictable markets consistently.</p>
-                        
-                        <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 mb-8 flex items-center gap-6">
-                            <div class="text-center border-r border-slate-700 pr-6">
-                                <div class="text-3xl font-bold text-brand-400">24</div>
-                                <div class="text-sm text-slate-400 uppercase tracking-wider">NOV</div>
-                            </div>
-                            <div>
-                                <div class="font-bold text-lg text-white">Sunday Evening Session</div>
-                                <div class="text-slate-400">7:00 PM - 9:00 PM IST</div>
-                            </div>
-                        </div>
-
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-start gap-3">
-                                <svg class="w-6 h-6 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span class="text-slate-300">Identify high-probability price action setups.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <svg class="w-6 h-6 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span class="text-slate-300">Learn strict risk management rules to protect your capital.</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <svg class="w-6 h-6 text-brand-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span class="text-slate-300">Live Q&A session with our top market analysts.</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 lg:p-10 shadow-2xl relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-48 h-48 bg-brand-500/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
-                        <h3 class="text-2xl font-bold mb-2">Reserve Your Seat</h3>
-                        <p class="text-slate-400 mb-8 text-sm">Spots are limited to 100 participants to ensure quality interaction.</p>
-                        
-                        <!-- Using a custom modal notification instead of alert to match UI paradigms -->
-                        <form class="space-y-5 relative z-10" onsubmit="event.preventDefault(); this.innerHTML='<div class=\'text-center py-8\'><svg class=\'w-16 h-16 text-brand-500 mx-auto mb-4\' fill=\'none\' stroke=\'currentColor\' viewBox=\'0 0 24 24\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z\'></path></svg><h4 class=\'text-2xl font-bold text-white mb-2\'>Registration Successful!</h4><p class=\'text-slate-400\'>Check your email for the webinar link.</p></div>';">
-                            <div>
-                                <label class="block text-sm font-medium text-slate-300 mb-1">Full Name</label>
-                                <input type="text" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors" placeholder="John Doe">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-300 mb-1">Email Address</label>
-                                <input type="email" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors" placeholder="john@example.com">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-300 mb-1">WhatsApp Number</label>
-                                <input type="tel" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors" placeholder="+91 98765 43210">
-                            </div>
-                            <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 rounded-xl transition-colors mt-4 shadow-lg shadow-brand-500/25">
-                                Register for Free
-                            </button>
-                            <p class="text-xs text-center text-slate-500 mt-4">By registering, you agree to our Terms & Privacy Policy.</p>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 hover:shadow-md transition-shadow group">
+          <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div class="inline-block px-3 py-0.5 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold mb-3">In-Person</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2">On-Site Strategy Workshops</h3>
+          <p class="text-slate-500 text-xs mb-4 leading-relaxed">Bring your strategies, trading plans, or investing ideas — and get direct feedback in focused, in-person sessions. We refine your ideas. You walk out sharper.</p>
+          <button onclick="navigate('consulting')" class="text-slate-900 text-xs font-semibold flex items-center gap-1 group-hover:text-teal-600 transition-colors">
+            Book a Seat
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
         </div>
+      </div>
+    </div>
+  </section>
 
-    </main>
-
-    <!-- Footer & CTA -->
-    <footer class="bg-slate-950 border-t border-slate-800 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-gradient-to-r from-brand-900/50 to-slate-900 border border-slate-800 rounded-3xl p-8 md:p-16 text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-6">Ready to grow your portfolio?</h2>
-                <p class="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">Whether you want to learn, refine, or grow - we're here to help.</p>
-                <button class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg shadow-brand-500/25">Get a Free Consultation</button>
+  <!-- Testimonials -->
+  <section class="py-20 bg-slate-50 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-3">
+        <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-slate-200 text-slate-500 text-xs font-medium bg-white">Testimonials</div>
+      </div>
+      <h2 class="text-2xl md:text-4xl font-bold text-slate-900 mb-14 text-center">What our clients say about us</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col gap-4 shadow-sm">
+          <div class="flex gap-0.5 text-amber-400">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed flex-grow">"I had zero knowledge about the stock market before taking the Foundations of the Market course. The lessons were straightforward and easy to follow, and I love how I could go at my own pace. Highly recommended for anyone starting from scratch."</p>
+          <div class="flex items-center gap-3 pt-2 border-t border-slate-50">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold bg-blue-100 text-blue-700">RK</div>
+            <div>
+              <p class="font-semibold text-slate-900 text-sm">Ravi Kumar</p>
+              <p class="text-xs text-slate-400">Software Engineer & Beginner Investor</p>
             </div>
-
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-slate-800 pt-8">
-                <div class="flex items-center gap-2 text-xl font-bold text-white">
-                    <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                    VRFE
-                </div>
-                
-                <div class="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
-                    <a href="#courses" class="hover:text-white transition-colors">Courses</a>
-                    <a href="#webinar" class="hover:text-white transition-colors">Webinar</a>
-                    <a href="#terms" class="hover:text-white transition-colors">Disclaimer</a>
-                    <a href="#privacy" class="hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#terms" class="hover:text-white transition-colors">Terms of Service</a>
-                    <a href="#terms" class="hover:text-white transition-colors">Cancellation</a>
-                </div>
-                
-                <div class="text-sm text-slate-500">
-                    &copy; <script>document.write(new Date().getFullYear())</script> VR Financial Educators.
-                </div>
-            </div>
+          </div>
         </div>
-    </footer>
+        <div class="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col gap-4 shadow-sm">
+          <div class="flex gap-0.5 text-amber-400">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed flex-grow">"The Live Market Training Sessions were exactly what I needed to bridge the gap between theory and real-world trading. I was able to see market analysis in real-time and ask questions during the sessions, which helped me improve my decision-making skills."</p>
+          <div class="flex items-center gap-3 pt-2 border-t border-slate-50">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold bg-emerald-100 text-emerald-700">SP</div>
+            <div>
+              <p class="font-semibold text-slate-900 text-sm">Simran P.</p>
+              <p class="text-xs text-slate-400">Working Professional & Intermediate Trader</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-100 rounded-2xl p-6 flex flex-col gap-4 shadow-sm">
+          <div class="flex gap-0.5 text-amber-400">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed flex-grow">"I attended the On-Site Strategy Workshop. I brought in my trading strategies and received detailed feedback on everything I was doing wrong. The instructors took the time to break down each trade, corrected my mistakes, and helped me refine my strategy."</p>
+          <div class="flex items-center gap-3 pt-2 border-t border-slate-50">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold bg-purple-100 text-purple-700">M</div>
+            <div>
+              <p class="font-semibold text-slate-900 text-sm">Mayank</p>
+              <p class="text-xs text-slate-400">SDE, Amazon</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Application Script for Single Page Routing -->
-    <script>
-        // Handle Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+  <!-- YouTube Section -->
+  <section class="py-20 bg-white px-4">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+        <div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-5">
+          <svg class="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <h3 class="text-lg font-bold text-slate-900 mb-1 tracking-wide uppercase">Basics of Stock Market</h3>
+        <p class="text-slate-400 text-sm mb-6">Free lessons on our YouTube channel. Like and subscribe to stay updated.</p>
+        <a href="https://www.youtube.com/@VRFinancialEducators" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-md font-semibold text-sm transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+          Subscribe on YouTube
+        </a>
+      </div>
+    </div>
+  </section>
 
-        // Close mobile menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
+  <!-- Dark CTA -->
+  <section class="relative py-24 px-4 overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1400&auto=format&fit=crop&q=80')"></div>
+    <div class="absolute inset-0 bg-slate-900/80"></div>
+    <div class="relative max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+        Whether you want to learn, refine, or grow — we're here to help.
+      </h2>
+      <button onclick="navigate('consulting')" class="bg-teal-500 hover:bg-teal-400 text-white px-8 py-3 rounded-md font-semibold text-sm transition-colors shadow-lg">
+        Get a Consultation
+      </button>
+    </div>
+  </section>
 
-        // Simple SPA Router using Hash
-        function navigate() {
-            const hash = window.location.hash || '#home';
-            const baseRoute = hash.split('-')[0]; // Handle specific scroll hashes like #home-offerings
-            
-            // Views
-            const homeView = document.getElementById('home-view');
-            const privacyView = document.getElementById('privacy-view');
-            const termsView = document.getElementById('terms-view');
-            const coursesView = document.getElementById('courses-view');
-            const webinarView = document.getElementById('webinar-view');
-            
-            // Hide all initially
-            homeView.classList.remove('active');
-            privacyView.classList.remove('active');
-            termsView.classList.remove('active');
-            coursesView.classList.remove('active');
-            webinarView.classList.remove('active');
-            
-            setTimeout(() => {
-                homeView.classList.add('hidden');
-                privacyView.classList.add('hidden');
-                termsView.classList.add('hidden');
-                coursesView.classList.add('hidden');
-                webinarView.classList.add('hidden');
-                
-                // Show requested view
-                if(baseRoute === '#privacy') {
-                    privacyView.classList.remove('hidden');
-                    setTimeout(() => privacyView.classList.add('active'), 50);
-                    window.scrollTo(0, 0);
-                } else if(baseRoute === '#terms') {
-                    termsView.classList.remove('hidden');
-                    setTimeout(() => termsView.classList.add('active'), 50);
-                    window.scrollTo(0, 0);
-                } else if(baseRoute === '#courses') {
-                    coursesView.classList.remove('hidden');
-                    setTimeout(() => coursesView.classList.add('active'), 50);
-                    window.scrollTo(0, 0);
-                } else if(baseRoute === '#webinar') {
-                    webinarView.classList.remove('hidden');
-                    setTimeout(() => webinarView.classList.add('active'), 50);
-                    window.scrollTo(0, 0);
-                } else {
-                    homeView.classList.remove('hidden');
-                    setTimeout(() => homeView.classList.add('active'), 50);
-                    
-                    // If simple home route, scroll to top. Otherwise handle scroll to section.
-                    if(hash === '#home') {
-                        window.scrollTo(0, 0);
-                    }
-                }
-            }, 10);
-        }
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12 px-4">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-xs">VR</span></div>
+          <span class="font-bold text-white text-lg">VRFE</span>
+        </div>
+        <p class="text-sm max-w-xs leading-relaxed">Expert-led finance education. Build a rock-solid foundation in the stock market and personal finance.</p>
+      </div>
+      <div class="flex gap-12">
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4">Learn</h4>
+          <ul class="space-y-2 text-sm">
+            <li><button onclick="navigate('courses')" class="hover:text-white transition-colors">Courses</button></li>
+            <li><button onclick="navigate('webinar')" class="hover:text-white transition-colors">Webinar</button></li>
+            <li><a href="https://www.youtube.com/@VRFinancialEducators" target="_blank" class="hover:text-white transition-colors">YouTube</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4">Company</h4>
+          <ul class="space-y-2 text-sm">
+            <li><button onclick="navigate('consulting')" class="hover:text-white transition-colors">Consulting</button></li>
+            <li><a href="https://vrpersonalfinance.in/" target="_blank" class="hover:text-white transition-colors">VRPF</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-5xl mx-auto mt-10 pt-6 border-t border-slate-800 text-xs text-slate-500 text-center">
+      © 2025 VR Financial Educators. All rights reserved.
+    </div>
+  </footer>
+</div>
 
-        // Custom function to handle navigation to Home AND scrolling to a section
-        window.goHomeAndScroll = function(sectionId) {
-            window.location.hash = '#home'; // force route to home
-            setTimeout(() => {
-                const element = document.getElementById(sectionId);
-                if(element) {
-                    // Adjust for sticky header height
-                    const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
-                    window.scrollTo({top: y, behavior: 'smooth'});
-                }
-            }, 100);
-        }
+<!-- ── COURSES ── -->
+<div id="page-courses" class="page pt-16">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="text-center mb-14 mt-8">
+      <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-slate-200 text-slate-500 text-xs font-medium bg-slate-50 mb-6">Our Programs</div>
+      <h1 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">Find the right course for you</h1>
+      <p class="text-slate-500 max-w-2xl mx-auto text-sm md:text-base">From beginner basics to advanced trading strategies — find the right program to elevate your financial journey.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        // Listen for hash changes to navigate
-        window.addEventListener('hashchange', navigate);
-        
-        // Initial load check
-        window.addEventListener('DOMContentLoaded', navigate);
-    </script>
+      <!-- Course 1 -->
+      <div class="rounded-2xl overflow-hidden flex flex-col border border-slate-200 hover:shadow-md transition-all group bg-white">
+        <div class="h-40 overflow-hidden bg-violet-50">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&auto=format&fit=crop&q=80" alt="Foundations" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-500"/>
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <div class="inline-block px-3 py-0.5 rounded-full text-xs font-semibold mb-3 w-max bg-blue-100 text-blue-700">Beginner</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2 leading-snug">Foundations of the Market</h3>
+          <p class="text-slate-500 text-xs mb-6 flex-grow leading-relaxed">Start your journey here. Learn the terminology, how exchanges work, portfolio management, risk assessment, and smart investing principles.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-xl font-bold text-slate-900">₹4,999</span>
+            <button class="px-4 py-2 rounded-lg font-semibold text-xs border border-slate-200 text-slate-900 hover:bg-slate-900 hover:text-white transition-all">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 2 (Featured) -->
+      <div class="rounded-2xl overflow-hidden flex flex-col ring-2 ring-slate-900 shadow-xl bg-white">
+        <div class="bg-slate-900 text-white text-xs font-bold text-center py-1.5 tracking-wide">MOST POPULAR</div>
+        <div class="h-40 overflow-hidden bg-orange-50">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&auto=format&fit=crop&q=80" alt="Advanced Price Action" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-500"/>
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <div class="inline-block px-3 py-0.5 rounded-full text-xs font-semibold mb-3 w-max bg-emerald-100 text-emerald-700">Intermediate</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2 leading-snug">Advanced Price Action</h3>
+          <p class="text-slate-500 text-xs mb-6 flex-grow leading-relaxed">Elevate your strategy. Dive deep into chart patterns, multi-timeframe analysis, and precision entries for active trading.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-xl font-bold text-slate-900">₹9,999</span>
+            <button class="px-4 py-2 rounded-lg font-semibold text-xs bg-slate-900 text-white hover:bg-slate-700 transition-all">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course 3 -->
+      <div class="rounded-2xl overflow-hidden flex flex-col border border-slate-200 hover:shadow-md transition-all group bg-white">
+        <div class="h-40 overflow-hidden bg-pink-50">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&auto=format&fit=crop&q=80" alt="Live Mentorship" class="w-full h-full object-cover opacity-75 group-hover:scale-105 transition-transform duration-500"/>
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <div class="inline-block px-3 py-0.5 rounded-full text-xs font-semibold mb-3 w-max bg-purple-100 text-purple-700">Pro / Live</div>
+          <h3 class="text-base font-bold text-slate-900 mb-2 leading-snug">Live Market Mentorship</h3>
+          <p class="text-slate-500 text-xs mb-6 flex-grow leading-relaxed">Trade alongside experts. Real-time market analysis, live trade execution, and 1-on-1 strategy refinement sessions.</p>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+            <span class="text-xl font-bold text-slate-900">₹24,999</span>
+            <button class="px-4 py-2 rounded-lg font-semibold text-xs border border-slate-200 text-slate-900 hover:bg-slate-900 hover:text-white transition-all">Apply Now</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-8 px-4 text-center text-xs">© 2025 VR Financial Educators. All rights reserved.</footer>
+</div>
+
+<!-- ── CONSULTING ── -->
+<div id="page-consulting" class="page pt-16">
+
+  <!-- VRPF Banner -->
+  <section class="bg-slate-50 border-b border-slate-100 py-16 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm flex flex-col lg:flex-row">
+        <div class="flex-1 p-8 lg:p-12 flex flex-col justify-center">
+          <div class="inline-flex items-center px-3 py-1.5 rounded-full border border-blue-200 text-blue-600 text-xs font-semibold bg-blue-50 mb-5 w-max">
+            Personal Finance made easy
+          </div>
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3 leading-tight">Wealth Creation Made Easy for You</h2>
+          <p class="text-slate-500 text-sm leading-relaxed mb-6">
+            We help individuals manage their finances and create generational wealth. Instead of done <em>for</em> you, we prefer done <em>with</em> you. Visit our personal finance platform to find out more.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex items-center gap-2 text-xs text-slate-600"><div class="w-1.5 h-1.5 rounded-full bg-teal-500"></div>Personalised Financial Planning</div>
+            <div class="flex items-center gap-2 text-xs text-slate-600"><div class="w-1.5 h-1.5 rounded-full bg-teal-500"></div>Proactive Wealth Management</div>
+            <div class="flex items-center gap-2 text-xs text-slate-600"><div class="w-1.5 h-1.5 rounded-full bg-teal-500"></div>Simplifying Complex Financial Concepts</div>
+          </div>
+          <a href="https://vrpersonalfinance.in/" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-700 text-white px-6 py-2.5 rounded-lg font-semibold text-sm transition-colors w-max">
+            Visit VRPF Website
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+        <div class="lg:w-80 bg-slate-50 border-t lg:border-t-0 lg:border-l border-slate-100 p-8 flex flex-col gap-4 justify-center">
+          <div class="bg-blue-50 rounded-xl p-4 flex items-center gap-3"><span class="text-2xl">💰</span><span class="text-sm font-semibold text-slate-700">Savings Allocation</span></div>
+          <div class="bg-green-50 rounded-xl p-4 flex items-center gap-3"><span class="text-2xl">📈</span><span class="text-sm font-semibold text-slate-700">Portfolio Growth</span></div>
+          <div class="bg-amber-50 rounded-xl p-4 flex items-center gap-3"><span class="text-2xl">👥</span><span class="text-sm font-semibold text-slate-700">People Who Invest</span></div>
+          <p class="text-xs text-slate-400 text-center mt-2">Explore all services at <a href="https://vrpersonalfinance.in/" target="_blank" class="text-teal-600 hover:underline font-medium">vrpersonalfinance.in</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Consulting Form -->
+  <section class="py-20 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div>
+          <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-slate-200 text-slate-500 text-xs font-medium bg-slate-50 mb-6">1-on-1 Consulting</div>
+          <h2 class="text-2xl md:text-4xl font-bold text-slate-900 mb-5 leading-tight">Get personalised guidance from our experts.</h2>
+          <p class="text-slate-500 text-sm leading-relaxed mb-8">Whether you're struggling with risk management, building your strategy, or just getting started — our consultants are here to help you navigate the markets with confidence.</p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3"><div class="w-5 h-5 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div><span class="text-slate-700 text-sm">Tailored advice for your financial goals</span></li>
+            <li class="flex items-start gap-3"><div class="w-5 h-5 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div><span class="text-slate-700 text-sm">Risk management strategy review</span></li>
+            <li class="flex items-start gap-3"><div class="w-5 h-5 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div><span class="text-slate-700 text-sm">Trading plan evaluation and refinement</span></li>
+            <li class="flex items-start gap-3"><div class="w-5 h-5 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div><span class="text-slate-700 text-sm">Portfolio assessment and recommendations</span></li>
+          </ul>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+          <div id="consulting-success" class="hidden text-center py-10">
+            <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4"><svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Request Received!</h3>
+            <p class="text-slate-500 text-sm">We'll get back to you within 24 hours to schedule your session.</p>
+          </div>
+          <div id="consulting-form">
+            <h3 class="text-xl font-bold text-slate-900 mb-1">Book a Free Consultation</h3>
+            <p class="text-slate-400 text-sm mb-6">No commitment. Just a conversation.</p>
+            <form onsubmit="submitForm(event,'consulting')" class="space-y-4">
+              <div><label class="block text-xs font-semibold text-slate-700 mb-1.5">Full Name</label><input type="text" required placeholder="John Doe" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500 bg-slate-50"/></div>
+              <div><label class="block text-xs font-semibold text-slate-700 mb-1.5">Email Address</label><input type="email" required placeholder="john@example.com" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500 bg-slate-50"/></div>
+              <div><label class="block text-xs font-semibold text-slate-700 mb-1.5">WhatsApp Number</label><input type="tel" required placeholder="+91 98765 43210" class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500 bg-slate-50"/></div>
+              <div><label class="block text-xs font-semibold text-slate-700 mb-1.5">What would you like help with?</label><textarea rows="3" placeholder="Brief description of your goals or challenges..." class="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500 bg-slate-50 resize-none"></textarea></div>
+              <button type="submit" class="w-full bg-slate-900 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg text-sm transition-colors mt-2">Submit Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="bg-slate-900 text-slate-400 py-8 px-4 text-center text-xs">© 2025 VR Financial Educators. All rights reserved.</footer>
+</div>
+
+<!-- ── WEBINAR ── -->
+<div id="page-webinar" class="page pt-16">
+  <div class="page-enter max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mt-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-xs font-semibold mb-6">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+          </span>
+          Upcoming Live Session
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold mb-5 text-slate-900 leading-tight">Mastering Market Volatility</h1>
+        <p class="text-slate-500 mb-8 text-sm md:text-base leading-relaxed">Join our exclusive live masterclass and discover the exact strategies professional traders use to navigate unpredictable markets consistently.</p>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-8 flex items-center gap-5">
+          <div class="text-center border-r border-slate-200 pr-5">
+            <div class="text-2xl font-bold text-teal-500">24</div>
+            <div class="text-xs text-slate-500 uppercase tracking-wider font-medium">NOV</div>
+          </div>
+          <div>
+            <div class="font-semibold text-slate-900 text-sm">Sunday Evening Session</div>
+            <div class="text-slate-500 text-xs mt-0.5">7:00 PM – 9:00 PM IST</div>
+          </div>
+        </div>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3"><div class="w-5 h-5 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div><span class="text-slate-700 text-sm">Identify high-probability price action setups.</span></li>
+          <li class="flex items-start gap-3"><div class="w-5 h-5 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div><span class="text-slate-700 text-sm">Learn strict risk management rules to protect your capital.</span></li>
+          <li class="flex items-start gap-3"><div class="w-5 h-5 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><svg class="w-3 h-3 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg></div><span class="text-slate-700 text-sm">Live Q&A session with our top market analysts.</span></li>
+        </ul>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+        <div id="webinar-success" class="hidden text-center py-10">
+          <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4"><svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2">Registration Successful!</h4>
+          <p class="text-slate-500 text-sm">Check your email for the webinar link.</p>
+        </div>
+        <div id="webinar-form">
+          <h3 class="text-xl font-bold text-slate-900 mb-1">Reserve Your Seat</h3>
+          <p class="text-slate-400 text-sm mb-6">Spots are limited to 100 participants.</p>
+          <form onsubmit="submitForm(event,'webinar')" class="space-y-4">
+            <div><label class="block text-xs font-semibold text-slate-700 mb-1.5">Full Name</label><input type="text" required placeholder="John Doe" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500"/></div>
+            <div><label class="block text-xs font-semibold text-slate-700 mb-1.5">Email Address</label><input type="email" required placeholder="john@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500"/></div>
+            <div><label class="block text-xs font-semibold text-slate-700 mb-1.5">WhatsApp Number</label><input type="tel" required placeholder="+91 98765 43210" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-500"/></div>
+            <button type="submit" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 rounded-lg text-sm transition-colors mt-2 shadow-md">Register for Free</button>
+            <p class="text-xs text-center text-slate-400">By registering, you agree to our Terms & Privacy Policy.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="bg-slate-900 text-slate-400 py-8 px-4 text-center text-xs">© 2025 VR Financial Educators. All rights reserved.</footer>
+</div>
+
+<script>
+  function navigate(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Update nav highlights
+    ['home','courses','consulting','webinar'].forEach(p => {
+      const el = document.getElementById('nav-' + p);
+      if (el) el.className = 'text-sm font-medium ' + (p === page ? 'text-slate-900' : 'text-slate-500 hover:text-slate-900') + ' transition-colors';
+    });
+    document.getElementById('mobile-menu').classList.add('hidden');
+  }
+
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  }
+
+  function submitForm(e, type) {
+    e.preventDefault();
+    document.getElementById(type + '-form').classList.add('hidden');
+    document.getElementById(type + '-success').classList.remove('hidden');
+  }
+
+  navigate('home');
+</script>
 </body>
 </html>
